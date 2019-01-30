@@ -1,0 +1,15 @@
+opam-version: "2.0"
+version: "1.0"
+authors: ["tck"]
+homepage: "https://github.com/tachukao/Owl_lbfgs"
+bug-reports: "https://github.com/tachukao/Owl_lbfgs/issues"
+dev-repo: "git+https://github.com/tachukao/Owl_lbfgs.git"
+license: "Apache-2.0"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+
+depends: [
+   "owl"
+   "lbfgs"
+]

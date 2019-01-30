@@ -1,4 +1,5 @@
 open Bigarray
+open Owl
 
 module Make 
     (A: Owl_types_ndarray_algodiff.Sig) 
@@ -17,9 +18,9 @@ module Make
     | MI  of  AD.t array
 
   type problem_t = 
-    | S of (AD.t -> AD.t) * AD.t
-    | P of (AD.t -> AD.t -> AD.t) * (AD.t * AD.t)
-    | M of (AD.t array -> AD.t) * (AD.t array)
+    | S of {f: (AD.t -> AD.t); init_prms: AD.t}
+    | P of {f: (AD.t -> AD.t -> AD.t); init_prms: (AD.t * AD.t)}
+    | M of {f: (AD.t array -> AD.t) ; init_prms: (AD.t array)}
 
   type prms_info = { 
     n_inputs: n_inputs_t; 
@@ -52,7 +53,7 @@ module Make
       | MI prms -> Many, prms in
     let i = ref 0 in
     let summary = Array.map (fun prm ->
-        let open A in
+        let open AD in
         let idx = !i in
         let l, s, t = 
           match prm with
@@ -69,12 +70,13 @@ module Make
   let extract_prms ~prms_info prms = 
     let prms = Array.map (fun (idx, l, s, t) -> 
         assert (t=0 || t=1);
-        if t=0 then A.pack_flt ((Array1.get prms idx))
+        if t=0 then AD.pack_flt ((Array1.get prms idx))
         else
           Array1.sub prms idx l
           |> genarray_of_array1
           |> (fun x -> reshape x s)
-          |> A.pack_arr 
+          |> A.genarray_to_arr
+          |> AD.pack_arr 
       ) prms_info.summary in
     match prms_info.n_inputs with 
     | One  ->  SI prms.(0)
@@ -93,7 +95,7 @@ module Make
         |> genarray_of_array1
         |> (fun x -> reshape x s)
       ) prms_info.summary in
-    let open A in
+    let open AD in
     Array.iter2 (fun a b ->
         match (extract a) with
         | F x    -> Genarray.set b [| 0 |] x
@@ -112,9 +114,9 @@ module Make
 
   let minimise ?(stop=default_stop) problem = 
     let f, prms0 = match problem with 
-      | S (f, x)          -> wrap_s_f f, SI x
-      | P (f, (x1, x2))   -> wrap_p_f f, PI (x1, x2)
-      | M (f, x)          -> wrap_m_f f, MI x
+      | S {f; init_prms}  -> wrap_s_f f, SI init_prms
+      | P {f; init_prms}  -> wrap_p_f f, PI (fst init_prms, snd init_prms)
+      | M {f; init_prms}  -> wrap_m_f f, MI init_prms
     in
     let prms_info =  build_prms_info prms0 in
     let open AD in
