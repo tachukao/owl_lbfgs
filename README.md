@@ -1,3 +1,4 @@
+#Owl_lbfgs
 This is a simple module that interfaces `Lbfgs` with `Owl`'s `Algodiff` module.
 To use this interface one begins with definig a cost function `f` using functions within the `Algodiff` module.
 One definies an optimisation problem by putting `f` and initial parameters `init_prms` into a record with type
@@ -14,9 +15,10 @@ Note that `init_prms` must also have the corresponding input type `t`, `t*t` and
 After this one can simply call `minimise` on the problem defined:
 ```ocaml
 let problem = S {f; init_prms}
-let c, prms = Owl_lbfgs.D.minimise problem
+let c, prms = minimise problem
 ```
-This function returns cost and the final parameters. To extract the parameters one can use, depending on the problem type:
+This function returns cost and the final parameters. To extract the parameters `prms` corresponding to each input type, one can use:
+
 S: 
 ```ocaml
 let prm = unpack_s prms 
