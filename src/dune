@@ -1,7 +1,8 @@
 (library
+   (name owl_lbfgs)
+   (wrapped false)
    (public_name owl_lbfgs)
-   (libraries
-   owl
-   lbfgs
-   )
-   )
+   (libraries owl lbfgs))
+
+
+

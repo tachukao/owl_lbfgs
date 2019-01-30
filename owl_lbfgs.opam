@@ -1,15 +1,18 @@
-opam-version: "2.0"
-version: "1.0"
-authors: ["tck"]
-homepage: "https://github.com/tachukao/Owl_lbfgs"
-bug-reports: "https://github.com/tachukao/Owl_lbfgs/issues"
-dev-repo: "git+https://github.com/tachukao/Owl_lbfgs.git"
-license: "Apache-2.0"
+opam-version: "1.2"
+maintainer: "tck <tck29@cam.ac.uk"
+authors: [ "Calvin Kao" ]
+homepage: "https://github.com/tachukao/owl_lbfgs"
+dev-repo: "git+https://github.com/tachukao/owl_lbfgs"
+bug-reports: "https://github.com/tachukao/owl_lbfgs/issues"
+
 build: [
-  ["dune" "build" "-p" name "-j" jobs]
+  [ "dune" "subst" ] {pinned}
+  [ "dune" "build" "-p" name "-j" jobs ]
 ]
+
 
 depends: [
    "owl"
    "lbfgs"
 ]
+
