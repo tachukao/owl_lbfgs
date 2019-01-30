@@ -4,7 +4,7 @@ One definies an optimisation problem by putting `f` and initial parameters `init
 ```ocaml
 type t = Algodiff.D.t
 type problem_t : 
- | S {f: (t -> t); init_prms:t  }
+ | S {f: (t -> t); init_prms: t}
  | P {f: (t -> t -> t); init_prms: t * t} 
  | M {f: (t array -> t); init_prms: t array}
 ```
@@ -32,11 +32,7 @@ M:
 let prms = unpack_m prms
 ```
 
-There's also the option of defining one's own `stop` function, which is used by `Lbfgs` as a function for determining when 
-to stop. By default the `stop` function prints the iteration and the cost at every step.
-
-
-
+There's also the option of defining one's own `stop` function, which is used by `Lbfgs` as a function for determining when to stop. By default the `stop` function prints the iteration and the cost at every step.
 
 
 
