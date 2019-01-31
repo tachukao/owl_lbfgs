@@ -12,8 +12,8 @@ type problem_t :
  | T {f: (t -> t -> t -> t); init_prms: t * t * t}
  | M {f: (t array -> t); init_prms: t array}
 ```
-Here `S`, `P`, and `M` corresponds to `f` taking 1 input, 2 inputs, and multiple (an array of) inputs respectively. 
-Note that `init_prms` must also have the corresponding input type `t`, `t*t` and `t array`.
+Here `S`, `P`, `T`, and `M` corresponds to `f` taking 1 input, 2 inputs, and multiple (an array of) inputs respectively. 
+Note that `init_prms` must also have the corresponding input type `t`, `t*t`, `t*t*t`, and `t array`.
 After this one can simply call `minimise` on the problem defined:
 
 `S`
