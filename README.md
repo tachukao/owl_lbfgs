@@ -1,6 +1,6 @@
 # Owl_lbfgs
 
-This is a simple module that interfaces `Lbfgs` with `Owl`'s `Algodiff` module.
+This is a simple module that interfaces [Lbfgs](https://github.com/Chris00/L-BFGS-ocaml/) with [Owl's](https://github.com/owlbarn/owl) `Algodiff` module.
 To use this interface one begins with definig a cost function `f` using functions within the `Algodiff` module.
 One definies an optimisation problem by putting `f` and initial parameters `init_prms` into a record with type
 ```ocaml
