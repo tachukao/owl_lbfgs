@@ -16,28 +16,29 @@ Here `S`, `P`, `T`, and `M` corresponds to `f` taking 1 input, 2 inputs, and mul
 Note that `init_prms` must also have the corresponding input type `t`, `t*t`, `t*t*t`, and `t array`.
 After this one can simply call `minimise` on the problem defined:
 
-`S`
+* S
 ```ocaml
 let problem = S {f; init_prms}
 let c, prms = minimise problem
 let prm = unpack_s prms 
 ```
 
-`P`
+* P
 ```ocaml
 let problem = P {f; init_prms}
 let c, prms = minimise problem
 let prm1, prm2 = unpack_p prms 
 ```
 
-`T`
+* T
 ```ocaml
 let problem = T {f; init_prms}
 let c, prms = minimise problem
 let prm = unpack_s prms 
 ```
 
-`M`
+
+* M
 ```ocaml
 let problem = M {f; init_prms}
 let c, prms = minimise problem
