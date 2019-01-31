@@ -106,7 +106,7 @@ let default_stop ?(every=1) st =
   end; 
   false 
 
-let minimise ?(pgtol:0.) ?(factr:1E9) ?(corrections=20) ?(stop=default_stop) problem = 
+let minimise ?(pgtol=0.) ?(factr=1E9) ?(corrections=20) ?(stop=default_stop) problem = 
   let f, prms0 = match problem with 
     | S {f; init_prms}  -> wrap_s_f f, SI init_prms
     | P {f; init_prms}  -> wrap_p_f f, PI (fst init_prms, snd init_prms)
