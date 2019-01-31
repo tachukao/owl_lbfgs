@@ -106,7 +106,7 @@ let default_stop ?(every=1) st =
   end; 
   false 
 
-let minimise ?(stop=default_stop) problem = 
+let minimise ?(pgtol:0.) ?(factr:1E9) ?(corrections=20) ?(stop=default_stop) problem = 
   let f, prms0 = match problem with 
     | S {f; init_prms}  -> wrap_s_f f, SI init_prms
     | P {f; init_prms}  -> wrap_p_f f, PI (fst init_prms, snd init_prms)
@@ -130,7 +130,7 @@ let minimise ?(stop=default_stop) problem =
     (*Array1.(create float64 c_layout total_n_prms) in*)
     blit ~prms_info primal prms0 x;
     x in
-  Lbfgs.(C.min ~print:No ~pgtol:0. ~factr:1E9 ~corrections:20 ~stop f_df prms |> ignore);
+  Lbfgs.(C.min ~print:No ~pgtol ~factr ~corrections ~stop f_df prms |> ignore);
   let prms = extract_prms ~prms_info prms in
   unpack_flt (f prms), prms
 
