@@ -97,7 +97,7 @@ let blit ~prms_info extract src dst =
       | _      -> assert false
     ) src dst
 
-let default_stop ?(every=1) st =
+let default_stop ~every st =
   let k = Lbfgs.iter st in
   let cost = Lbfgs.previous_f st in
   if k mod every = 0 then begin
@@ -106,7 +106,7 @@ let default_stop ?(every=1) st =
   end; 
   false 
 
-let minimise ?(pgtol=0.) ?(factr=1E9) ?(corrections=20) ?(stop=default_stop) problem = 
+let minimise ?(pgtol=0.) ?(factr=1E9) ?(corrections=20) ?(stop=(default_stop ~every:1)) problem = 
   let f, prms0 = match problem with 
     | S {f; init_prms}  -> wrap_s_f f, SI init_prms
     | P {f; init_prms}  -> wrap_p_f f, PI (fst init_prms, snd init_prms)
