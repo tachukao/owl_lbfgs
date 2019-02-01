@@ -31,7 +31,7 @@ let prm1, prm2 = unpack_p prms
 * three inputs
 ```ocaml
 let c, prms = minimise (T {f; init_prms})
-let prm1, prm2, prm3 = unpack_s prms 
+let prm1, prm2, prm3 = unpack_t prms 
 ```
 
 
