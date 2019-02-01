@@ -31,14 +31,14 @@ let prm1, prm2 = unpack_p prms
 * three inputs
 ```ocaml
 let c, prms = minimise (T {f; init_prms})
-let prm = unpack_s prms 
+let prm1, prm2, prm3 = unpack_s prms 
 ```
 
 
 * an array of inputs
 ```ocaml
 let c, prms = minimise (M {f; init_prms})
-let prms = unpack_m prms 
+let prms_arr = unpack_m prms 
 ```
 
 There's also the option of defining one's own `stop` function, which is used by `Lbfgs` as a function for determining when to stop. By default the `stop` function prints the iteration and the cost at every step.
