@@ -12,36 +12,32 @@ type problem_t :
  | T {f: (t -> t -> t -> t); init_prms: t * t * t}
  | M {f: (t array -> t); init_prms: t array}
 ```
-Here `S`, `P`, `T`, and `M` corresponds to `f` taking 1 input, 2 inputs, and multiple (an array of) inputs respectively. 
+Here `S`, `P`, `T`, and `M` corresponds to `f` taking a single, a pair, a triple, and an array of inputs respectively. 
 Note that `init_prms` must also have the corresponding input type `t`, `t*t`, `t*t*t`, and `t array`.
 After this one can simply call `minimise` on the problem defined:
 
-* S
+* single input
 ```ocaml
-let problem = S {f; init_prms}
-let c, prms = minimise problem
+let c, prms = minimise (S {f; init_prms})
 let prm = unpack_s prms 
 ```
 
-* P
+* pair inputs
 ```ocaml
-let problem = P {f; init_prms}
-let c, prms = minimise problem
+let c, prms = minimise (P {f; init_prms})
 let prm1, prm2 = unpack_p prms 
 ```
 
-* T
+* three inputs
 ```ocaml
-let problem = T {f; init_prms}
-let c, prms = minimise problem
+let c, prms = minimise (T {f; init_prms})
 let prm = unpack_s prms 
 ```
 
 
-* M
+* an array of inputs
 ```ocaml
-let problem = M {f; init_prms}
-let c, prms = minimise problem
+let c, prms = minimise (M {f; init_prms})
 let prms = unpack_m prms 
 ```
 
