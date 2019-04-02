@@ -2,6 +2,14 @@
 
 This is a simple module that interfaces [Lbfgs](https://github.com/Chris00/L-BFGS-ocaml/) with [Owl's](https://github.com/owlbarn/owl) `Algodiff` module.
 To use this interface one begins with definig a cost function `f` using functions within the `Algodiff` module.
+
+### Installation
+
+```sh
+make install
+```
+
+### Usage
 One definies an optimisation problem by putting `f` and initial parameters `init_prms` into a record with type
 ```ocaml
 open Owl_lbfgs
@@ -42,7 +50,5 @@ let prms_arr = unpack_m prms
 ```
 
 There's also the option of defining one's own `stop` function, which is used by `Lbfgs` as a function for determining when to stop. By default the `stop` function prints the iteration and the cost at every step.
-
-
 
 

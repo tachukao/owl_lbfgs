@@ -1,2 +1,1 @@
-(lang dune 1.1)
-(name owl_lbfgs)
+(lang dune 1.6)
