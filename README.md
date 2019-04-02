@@ -26,26 +26,26 @@ After this one can simply call `minimise` on the problem defined:
 
 * single input
 ```ocaml
-let c, prms = minimise (S {f; init_prms})
+let loss, prms = minimise (S {f; init_prms})
 let prm = unpack_s prms 
 ```
 
 * pair inputs
 ```ocaml
-let c, prms = minimise (P {f; init_prms})
+let loss, prms = minimise (P {f; init_prms})
 let prm1, prm2 = unpack_p prms 
 ```
 
 * three inputs
 ```ocaml
-let c, prms = minimise (T {f; init_prms})
+let loss, prms = minimise (T {f; init_prms})
 let prm1, prm2, prm3 = unpack_t prms 
 ```
 
 
 * an array of inputs
 ```ocaml
-let c, prms = minimise (M {f; init_prms})
+let loss, prms = minimise (M {f; init_prms})
 let prms_arr = unpack_m prms 
 ```
 
